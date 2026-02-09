@@ -53,23 +53,23 @@ const char* htmlPage = R"rawliteral(
 <body>
   <div class="controls">
     <div class="servo-control">
-      <h3>Rudder (Servo 1)</h3>
+      <h3>Rudder (Servo 2)</h3>
       <!-- hold to move, release to return to center (90) -->
       <button
-        onpointerdown="setRudder(30)"
+        onpointerdown="setRudder(150)"
         onpointerup="resetRudder()"
         onpointercancel="resetRudder()"
         onpointerleave="resetRudder()"
       >Left</button>
       <button
-        onpointerdown="setRudder(150)"
+        onpointerdown="setRudder(30)"
         onpointerup="resetRudder()"
         onpointercancel="resetRudder()"
         onpointerleave="resetRudder()"
       >Right</button>
     </div>
     <div class="servo-control">
-      <h3>Sails (Servo 2)</h3>
+      <h3>Sails (Servo 3)</h3>
       <!-- hold to continuously adjust sail position -->
       <button
         onpointerdown="startSailAdjust('in')"
@@ -90,15 +90,6 @@ const char* htmlPage = R"rawliteral(
   let sailPos = 90;
   let sailAdjustInterval = null;
 
-  function setSail(position) {
-      if (position === 'in') {
-          sailPos = Math.max(0, sailPos - 10);
-      } else if (position === 'out') {
-          sailPos = Math.min(180, sailPos + 10);
-      }
-      control(2, sailPos);
-  }
-
   function startSailAdjust(direction) {
       // perform one immediate step
       adjustSailOnce(direction);
@@ -110,9 +101,9 @@ const char* htmlPage = R"rawliteral(
   function adjustSailOnce(direction) {
       const step = 2; // degrees per step (tweak as needed)
       if (direction === 'in') {
-          sailPos = Math.max(0, sailPos - step);
-      } else if (direction === 'out') {
           sailPos = Math.min(180, sailPos + step);
+      } else if (direction === 'out') {
+          sailPos = Math.max(0, sailPos - step);
       }
       control(2, sailPos);
   }
