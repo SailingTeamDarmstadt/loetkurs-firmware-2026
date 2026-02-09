@@ -68,7 +68,7 @@ void setup() {
   //          macAddr[0], macAddr[1], macAddr[2],
   //          macAddr[3], macAddr[4], macAddr[5]);
   // TODO: hack
-  snprintf(ssid, 10, "aaa");
+  snprintf(ssid, 10, "esp_wifi");
 
   ESP32PWM::allocateTimer(0);
 	ESP32PWM::allocateTimer(1);
