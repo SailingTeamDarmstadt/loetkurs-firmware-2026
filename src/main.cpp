@@ -9,9 +9,9 @@
 
 WebServer server;
 
-constexpr int SERVO1 = 3;
+constexpr int SERVO1 = 1;
 constexpr int SERVO2 = 4;
-constexpr int SERVO3 = 5;
+constexpr int LED1   = 10;
 
 const char ssid_p1[] = "ServoControl";
 char ssid[sizeof(ssid_p1) + 1 + 6*2 + 5];
@@ -45,6 +45,7 @@ void handleControl() {
     }
     
     servoPtr->write(value);
+    analogWrite(LED1, value);
     server.send(200, "text/plain", "OK");
   } else {
     server.send(400, "text/plain", "Bad Request");
@@ -90,6 +91,9 @@ void setup() {
   server.on("/", handleRoot);
   server.on("/control", handleControl);
   server.onNotFound(handleNotFound);
+
+  pinMode(LED1, OUTPUT);
+  analogWrite(LED1, 1);
 }
 
 void loop() {
