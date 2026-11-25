@@ -85,6 +85,7 @@ const char* htmlPage = R"rawliteral(
       >Sheet Out</button>
     </div>
   </div>
+  <button onclick="fetch('/led?state=toggle')">Toggle LED</button>
   <script>
 
   let sailPos = 90;
